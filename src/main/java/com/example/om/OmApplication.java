@@ -3,6 +3,7 @@ package com.example.om;
 
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,10 +17,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
 public class OmApplication {
+	
+	
+	private static  ObjectMapper objectMapper;
+	
+	
+	@Autowired
+	public void setObjectMapper(ObjectMapper objectMapper) {
+		OmApplication.objectMapper = objectMapper;
+	}
+
 
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
 		ConfigurableApplicationContext context = SpringApplication.run(OmApplication.class, args);
-		ObjectMapper objectMapper = (ObjectMapper)context.getBean(ObjectMapper.class);
+	//	ObjectMapper objectMapper = (ObjectMapper)context.getBean(ObjectMapper.class);
 		System.out.println(objectMapper);
 		
 		Person p = test();
